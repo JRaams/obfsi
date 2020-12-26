@@ -1,13 +1,17 @@
 package main
 
 import (
-	"log"
-
-	"github.com/jraams/obfsi/market-spider/db"
+	"github.com/jraams/obfsi/market-spider/dbc"
+	"github.com/jraams/obfsi/market-spider/steamItem"
 )
 
 func main() {
-	db := db.GetCon()
+	db := dbc.GetDBCon()
 	defer db.Close()
-	log.Println(db.Driver())
+
+	steamItem.CreateTables(db)
+
+	// req.FetchPrices()
+	steamItems := steamItem.GetSteamMarketPrices(nil)
+	steamItem.SaveSteamItems(db, steamItems)
 }
