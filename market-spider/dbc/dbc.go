@@ -37,6 +37,7 @@ func TableExists(db *sql.DB, name string) bool {
 	if err != nil {
 		log.Panicf("Error checking if %s table exists: %s", name, err.Error())
 	}
+	defer rows.Close()
 	return rows.Next()
 }
 

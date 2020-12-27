@@ -45,9 +45,16 @@ type SteamResponse struct {
 }
 
 type SteamItem struct {
-	Name     string `json:"name"`
-	Listings int    `json:"sell_listings"`
-	Price    int    `json:"sell_price"`
+	Name     string        `json:"name"`
+	Listings int           `json:"sell_listings"`
+	Price    int           `json:"sell_price"`
+	Desc     SteamItemDesc `json:"asset_description"`
+}
+
+type SteamItemDesc struct {
+	IconUrl   string `json:"icon_url"`
+	NameColor string `json:"name_color"`
+	Type      string `json:"type"`
 }
 
 func FetchPrices() {
@@ -96,10 +103,42 @@ func GetSteamMarketPrices(priceJob *PriceJob) []SteamItem {
 	return steamResponse.Results
 }
 
+type Asset struct {
+	Name      string `json:"name"`
+	NameColor string `json:"nameColor"`
+	IconUrl   string `json:"iconUrl"`
+	Type      string `json:"type"`
+}
+
+type Price struct {
+	Id        int    `json:"id"`
+	AssetName string `json:"assets_name"`
+	Time      int64  `json:"time"`
+	Listings  int    `json:"listings"`
+	Price     int    `json:"price"`
+}
+
 func SaveSteamItems(db *sql.DB, steamItems []SteamItem) {
 	log.Printf("Saving %d items to db...", len(steamItems))
 
-	// for _, item := range steamItems {
-	// 	// log.Printf("%v", item)
-	// }
+	for _, item := range steamItems {
+		if !AssetExists(db, item.Name) {
+			log.Printf("Creating asset %s...", item.Name)
+			asset := &Asset{
+				Name:      item.Name,
+				NameColor: item.Desc.NameColor,
+				IconUrl:   item.Desc.IconUrl,
+				Type:      item.Desc.Type,
+			}
+			CreateAsset(db, asset)
+		}
+
+		price := &Price{
+			AssetName: item.Name,
+			Time:      time.Now().Unix(),
+			Listings:  item.Listings,
+			Price:     item.Price,
+		}
+		InsertPrice(db, price)
+	}
 }
