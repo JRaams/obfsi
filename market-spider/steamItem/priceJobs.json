@@ -1,50 +1,50 @@
 [
   {
     "name": "Broken Fang Agents",
-    "url": "https://steamcommunity.com/market/search/render?appid=730&count=20&norender=1&category_730_ItemSet[]=tag_set_op10_characters"
+    "url": "https://steamcommunity.com/market/search/render?appid=730&count=20&sort_column=name&sort_dir=asc&&norender=1&category_730_ItemSet[]=tag_set_op10_characters"
   },
   {
     "name": "Opertion Broken Fang Case",
-    "url": "https://steamcommunity.com/market/search/render?appid=730&count=1&norender=1&query=Broken+Fang&category_730_Type[]=tag_CSGO_Type_WeaponCase"
+    "url": "https://steamcommunity.com/market/search/render?appid=730&count=1&sort_column=name&sort_dir=asc&&norender=1&query=Broken+Fang&category_730_Type[]=tag_CSGO_Type_WeaponCase"
   },
   {
     "name": "The Control Collection",
-    "url": "https://steamcommunity.com/market/search/render?appid=730&count=79&norender=1&category_730_ItemSet[]=tag_set_op10_ct"
+    "url": "https://steamcommunity.com/market/search/render?appid=730&count=79&sort_column=name&sort_dir=asc&&norender=1&category_730_ItemSet[]=tag_set_op10_ct"
   },
   {
     "name": "The Havoc Collection",
-    "url": "https://steamcommunity.com/market/search/render?appid=730&count=88&norender=1&category_730_ItemSet[]=tag_set_op10_ct"
+    "url": "https://steamcommunity.com/market/search/render?appid=730&count=88&sort_column=name&sort_dir=asc&&norender=1&category_730_ItemSet[]=tag_set_op10_ct"
   },
   {
     "name": "The Ancient Collection",
-    "url": "https://steamcommunity.com/market/search/render?appid=730&count=82&norender=1&category_730_ItemSet[]=tag_set_op10_ancient"
+    "url": "https://steamcommunity.com/market/search/render?appid=730&count=82&sort_column=name&sort_dir=asc&&norender=1&category_730_ItemSet[]=tag_set_op10_ancient"
   },
   {
     "name": "Metal Skill Group Patch Collection",
-    "url": "https://steamcommunity.com/market/search/render?appid=730&count=17&norender=1&category_730_PatchCapsule[]=tag_crate_patch_pack02"
+    "url": "https://steamcommunity.com/market/search/render?appid=730&count=17&sort_column=name&sort_dir=asc&&norender=1&category_730_PatchCapsule[]=tag_crate_patch_pack02"
   },
   {
     "name": "CS:GO Graffiti #3 Collection (1/4)",
-    "url": "https://steamcommunity.com/market/search/render?appid=730&count=100&norender=1&category_730_SprayCapsule[]=tag_csgo_spray_std3_drops"
+    "url": "https://steamcommunity.com/market/search/render?appid=730&count=100&sort_column=name&sort_dir=asc&&norender=1&category_730_SprayCapsule[]=tag_csgo_spray_std3_drops"
   },
   {
     "name": "CS:GO Graffiti #3 Collection (2/4)",
-    "url": "https://steamcommunity.com/market/search/render?appid=730&count=100start=100&norender=1&category_730_SprayCapsule[]=tag_csgo_spray_std3_drops"
+    "url": "https://steamcommunity.com/market/search/render?appid=730&count=100&sort_column=name&sort_dir=asc&start=100&norender=1&category_730_SprayCapsule[]=tag_csgo_spray_std3_drops"
   },
   {
     "name": "CS:GO Graffiti #3 Collection (3/4)",
-    "url": "https://steamcommunity.com/market/search/render?appid=730&count=100start=200&norender=1&category_730_SprayCapsule[]=tag_csgo_spray_std3_drops"
+    "url": "https://steamcommunity.com/market/search/render?appid=730&count=100&sort_column=name&sort_dir=asc&start=200&norender=1&category_730_SprayCapsule[]=tag_csgo_spray_std3_drops"
   },
   {
     "name": "CS:GO Graffiti #3 Collection (4/4)",
-    "url": "https://steamcommunity.com/market/search/render?appid=730&count=4start=300&norender=1&category_730_SprayCapsule[]=tag_csgo_spray_std3_drops"
+    "url": "https://steamcommunity.com/market/search/render?appid=730&count=4&sort_column=name&sort_dir=asc&start=300&norender=1&category_730_SprayCapsule[]=tag_csgo_spray_std3_drops"
   },
   {
     "name": "Broken Fang Sticker Collection",
-    "url": "https://steamcommunity.com/market/search/render?appid=730&count=17&norender=1&category_730_StickerCapsule[]=tag_crate_sticker_pack_broken_fang_lootlist"
+    "url": "https://steamcommunity.com/market/search/render?appid=730&count=17&sort_column=name&sort_dir=asc&&norender=1&category_730_StickerCapsule[]=tag_crate_sticker_pack_broken_fang_lootlist"
   },
   {
     "name": "Recoil Sticker Collection",
-    "url": "https://steamcommunity.com/market/search/render?appid=730&count=32&norender=1&category_730_StickerCapsule[]=tag_crate_sticker_pack_recoil_lootlist"
+    "url": "https://steamcommunity.com/market/search/render?appid=730&count=32&sort_column=name&sort_dir=asc&&norender=1&category_730_StickerCapsule[]=tag_crate_sticker_pack_recoil_lootlist"
   }
 ]

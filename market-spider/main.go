@@ -10,8 +10,5 @@ func main() {
 	defer db.Close()
 
 	steamItem.CreateTables(db)
-
-	// req.FetchPrices()
-	steamItems := steamItem.GetSteamMarketPrices(nil)
-	steamItem.SaveSteamItems(db, steamItems)
+	steamItem.FetchPrices(db)
 }

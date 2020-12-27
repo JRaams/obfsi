@@ -40,27 +40,11 @@ func AssetExists(db *sql.DB, name string) bool {
 func CreateAsset(db *sql.DB, asset *Asset) {
 	SQL := fmt.Sprintf(`INSERT INTO "assets" ("name", "nameColor", "iconUrl", "type") VALUES 
 	("%s", "%s", "%s", "%s");`, asset.Name, asset.NameColor, asset.IconUrl, asset.Type)
-	statement, err := db.Prepare(SQL)
-	if err != nil {
-		log.Panicf("Error preparing statement to insert %s: %s", asset.Name, err.Error())
-	}
-
-	_, err = statement.Exec()
-	if err != nil {
-		log.Panicf("Error creating new asset %s: %s", asset.Name, err.Error())
-	}
+	dbc.Exec(db, SQL)
 }
 
 func InsertPrice(db *sql.DB, price *Price) {
 	SQL := fmt.Sprintf(`INSERT INTO "prices" ("assets_name", "time", "listings", "price") VALUES
 	("%s", %d, %d, %d);`, price.AssetName, price.Time, price.Listings, price.Price)
-	statement, err := db.Prepare(SQL)
-	if err != nil {
-		log.Panicf("Error preparing statement to insert price: %s", err.Error())
-	}
-
-	_, err = statement.Exec()
-	if err != nil {
-		log.Panicf("Error inserting new price: %s", err.Error())
-	}
+	dbc.Exec(db, SQL)
 }

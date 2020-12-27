@@ -43,17 +43,20 @@ func TableExists(db *sql.DB, name string) bool {
 
 func CreateTable(db *sql.DB, name string, sql string) {
 	if TableExists(db, name) {
-		log.Printf("Table %s already exists\n", name)
-	} else {
-		log.Printf("Creating %s table\n", name)
-		statement, err := db.Prepare(sql)
-		if err != nil {
-			log.Panicf("Error preparing %s table statement: %s", name, err.Error())
-		}
-		result, err := statement.Exec()
-		if err != nil {
-			log.Panicf("Error creating %s table: %s", name, err.Error())
-		}
-		log.Println(result)
+		return
+	}
+
+	log.Printf("Creating %s table\n", name)
+	Exec(db, sql)
+}
+
+func Exec(db *sql.DB, sql string) {
+	statement, err := db.Prepare(sql)
+	if err != nil {
+		log.Panicf("Error preparing statement: %s", err.Error())
+	}
+	_, err = statement.Exec()
+	if err != nil {
+		log.Panicf("Error executing sql: %s", err.Error())
 	}
 }

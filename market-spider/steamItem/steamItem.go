@@ -57,7 +57,7 @@ type SteamItemDesc struct {
 	Type      string `json:"type"`
 }
 
-func FetchPrices() {
+func FetchPrices(db *sql.DB) {
 	// Read price inputs
 	input, err := ioutil.ReadFile("./steamItem/priceJobs.json")
 	if err != nil {
@@ -78,29 +78,23 @@ func FetchPrices() {
 	}
 	delayPerJob := 45 / len(priceJobs)
 	for i := 0; i < len(priceJobs); i++ {
-		s.Delay().Minute(delayPerJob*i).Do(GetSteamMarketPrices, &priceJobs[i])
+		s.Delay().Second(delayPerJob*i).Do(GetSteamMarketPrices, db, &priceJobs[i])
 	}
 	time.Sleep(50 * time.Minute)
 }
 
-func GetSteamMarketPrices(priceJob *PriceJob) []SteamItem {
-	// log.Printf("<getSteamMarketPrices> name: %s, url: %s", priceJob.Name, priceJob.Url)
-	// body := Get(priceJob.Url)
-	// log.Printf("%s: %s", priceJob.Name, body)
-
-	body, err := ioutil.ReadFile("./steamItem/test.json")
-	if err != nil {
-		log.Panicf("Error reading req/test.json: %s", err.Error())
-	}
+func GetSteamMarketPrices(db *sql.DB, priceJob *PriceJob) {
+	log.Printf("<GetSteamMarketPrices> Job: %s", priceJob.Name)
+	body := Get(priceJob.Url)
 
 	var steamResponse SteamResponse
 
-	err = json.Unmarshal(body, &steamResponse)
+	err := json.Unmarshal([]byte(body), &steamResponse)
 	if err != nil {
 		log.Panicf("Error unmarshaling steamResponse: %s", err.Error())
 	}
 
-	return steamResponse.Results
+	SaveSteamItems(db, steamResponse.Results)
 }
 
 type Asset struct {
@@ -119,7 +113,7 @@ type Price struct {
 }
 
 func SaveSteamItems(db *sql.DB, steamItems []SteamItem) {
-	log.Printf("Saving %d items to db...", len(steamItems))
+	log.Printf("Saving %d prices to db...", len(steamItems))
 
 	for _, item := range steamItems {
 		if !AssetExists(db, item.Name) {
