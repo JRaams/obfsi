@@ -2,13 +2,13 @@ package main
 
 import (
 	"github.com/jraams/obfsi/market-spider/dbc"
-	"github.com/jraams/obfsi/market-spider/steamItem"
+	"github.com/jraams/obfsi/market-spider/steamitem"
 )
 
 func main() {
 	db := dbc.GetDBCon()
 	defer db.Close()
 
-	steamItem.CreateTables(db)
-	steamItem.FetchPrices(db)
+	steamitem.CreateTables(db)
+	steamitem.FetchPrices(db)
 }

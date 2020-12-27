@@ -6,11 +6,12 @@ import (
 	"log"
 	"os"
 
-	_ "github.com/mattn/go-sqlite3"
+	_ "github.com/mattn/go-sqlite3" // SQLite3 import
 )
 
 const dbName = "market.db"
 
+// GetDBCon returns a connection to the (SQLite3) database
 func GetDBCon() *sql.DB {
 	if _, err := os.Stat(dbName); os.IsNotExist(err) {
 		log.Printf("Creating %s...", dbName)
@@ -28,10 +29,11 @@ func GetDBCon() *sql.DB {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	log.Println("Succesfully connected to db!")
+	log.Println("Successfully connected to db!")
 	return db
 }
 
+// TableExists checks whether a table exists
 func TableExists(db *sql.DB, name string) bool {
 	rows, err := db.Query(fmt.Sprintf("PRAGMA table_info(%s);", name))
 	if err != nil {
@@ -41,6 +43,7 @@ func TableExists(db *sql.DB, name string) bool {
 	return rows.Next()
 }
 
+// CreateTable creates a table according
 func CreateTable(db *sql.DB, name string, sql string) {
 	if TableExists(db, name) {
 		return
@@ -50,11 +53,13 @@ func CreateTable(db *sql.DB, name string, sql string) {
 	Exec(db, sql)
 }
 
+// Exec executes a specified SQL string in a prepared statement
 func Exec(db *sql.DB, sql string) {
 	statement, err := db.Prepare(sql)
 	if err != nil {
 		log.Panicf("Error preparing statement: %s", err.Error())
 	}
+	defer statement.Close()
 	_, err = statement.Exec()
 	if err != nil {
 		log.Panicf("Error executing sql: %s", err.Error())
