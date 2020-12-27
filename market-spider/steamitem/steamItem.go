@@ -3,7 +3,6 @@ package steamitem
 import (
 	"database/sql"
 	"encoding/json"
-	"io/ioutil"
 	"log"
 	"time"
 
@@ -13,19 +12,6 @@ import (
 
 // FetchPrices fetches the latest Steam market items for all jobs in priceJobs.json
 func FetchPrices(db *sql.DB) {
-	// Read price inputs
-	input, err := ioutil.ReadFile("./steamitem/priceJobs.json")
-	if err != nil {
-		log.Panicf("Error reading req/priceJobs.json: %s", err.Error())
-	}
-
-	var priceJobs []PriceJob
-
-	err = json.Unmarshal(input, &priceJobs)
-	if err != nil {
-		log.Panicf("Error unmarshaling price list input: %s", err.Error())
-	}
-
 	// Spread all jobs over 45 minutes to prevent spamming the market and getting timeouts
 	s, err := scheduler.NewScheduler(100)
 	if err != nil {
