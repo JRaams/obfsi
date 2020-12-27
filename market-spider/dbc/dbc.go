@@ -6,41 +6,52 @@ import (
 	"log"
 	"os"
 
-	_ "github.com/mattn/go-sqlite3" // SQLite3 import
+	_ "github.com/lib/pq" // postgres import
 )
 
-const dbName = "market.db"
+const defaultDbSource = "host=0.0.0.0 port=5432 user=obfsi dbname=obfsi sslmode=disable"
 
-// GetDBCon returns a connection to the (SQLite3) database
+// GetDBCon returns a connection to the (postgres) database
 func GetDBCon() *sql.DB {
-	if _, err := os.Stat(dbName); os.IsNotExist(err) {
-		log.Printf("Creating %s...", dbName)
-		file, err2 := os.Create(dbName)
-		if err2 != nil {
-			log.Fatal(err.Error())
-		}
-		file.Close()
-		log.Printf("%s created!", dbName)
-	} else {
-		log.Println("Existing db found!")
+	psqlconn := os.Getenv("DBSOURCE")
+	if len(psqlconn) == 0 {
+		log.Printf("DBSOURCE env not specified, using default: %s", defaultDbSource)
+		psqlconn = defaultDbSource
 	}
 
-	db, err := sql.Open("sqlite3", dbName)
+	db, err := sql.Open("postgres", psqlconn)
 	if err != nil {
 		log.Fatal(err.Error())
 	}
+
+	err = db.Ping()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
 	log.Println("Successfully connected to db!")
 	return db
 }
 
 // TableExists checks whether a table exists
 func TableExists(db *sql.DB, name string) bool {
-	rows, err := db.Query(fmt.Sprintf("PRAGMA table_info(%s);", name))
+	SQL := `SELECT EXISTS (
+		SELECT FROM information_schema.tables
+		WHERE  table_schema = 'public'
+		AND    table_name   = '%s'
+ );`
+	rows, err := db.Query(fmt.Sprintf(SQL, name))
 	if err != nil {
 		log.Panicf("Error checking if %s table exists: %s", name, err.Error())
 	}
 	defer rows.Close()
-	return rows.Next()
+
+	rows.Next()
+	var exists bool
+	if err = rows.Scan(&exists); err != nil {
+		log.Panicf("Error checking if %s table exists: %s", name, err.Error())
+	}
+	return exists
 }
 
 // CreateTable creates a table according
@@ -60,8 +71,8 @@ func Exec(db *sql.DB, sql string) {
 		log.Panicf("Error preparing statement: %s", err.Error())
 	}
 	defer statement.Close()
-	_, err = statement.Exec()
-	if err != nil {
+
+	if _, err = statement.Exec(); err != nil {
 		log.Panicf("Error executing sql: %s", err.Error())
 	}
 }

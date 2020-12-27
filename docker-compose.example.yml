@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'postgres:13-alpine'
+    environment:
+      POSTGRES_USER: obfsi
+      POSTGRES_PASSWORD: 
+      POSTGRES_DB: obfsi
+    ports:
+      - "5432:5432"
+
+  market-spider:
+    build: ./market-spider
+    depends_on: 
+      - postgres
+    environment:
+      DBSOURCE: "host=0.0.0.0 port=5432 user=obfsi password= dbname=obfsi sslmode=disable"
