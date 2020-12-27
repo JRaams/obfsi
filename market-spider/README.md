@@ -11,7 +11,7 @@ Steam market spider that runs a crobjob every hour to fetch recent item prices
 
 ### OCI container
 
-Using [Posman](https://podman.io/getting-started/installation)
+Using [Podman](https://podman.io/getting-started/installation)
 
 Building the image:
 `$ cd market-spider`
