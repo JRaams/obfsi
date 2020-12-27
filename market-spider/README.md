@@ -21,7 +21,7 @@ Running a container with said image:
 `$ podman run -d localhost/market-spider:latest`
 
 Inspecting the container:
-`$ podman logs -l`
+`$ podman logs -lf`
 
 Copy all files in container for debugging:
 `$ podman cp <containername>:/ ./.docker/`

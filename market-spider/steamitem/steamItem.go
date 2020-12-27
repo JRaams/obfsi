@@ -19,7 +19,7 @@ func FetchPrices(db *sql.DB) {
 	}
 	delayPerJob := 45 / len(priceJobs)
 	for i := 0; i < len(priceJobs); i++ {
-		s.Delay().Second(delayPerJob*i).Do(getSteamMarketPrices, db, &priceJobs[i])
+		s.Delay().Minute(delayPerJob*i).Do(getSteamMarketPrices, db, &priceJobs[i])
 	}
 	time.Sleep(50 * time.Minute)
 }
