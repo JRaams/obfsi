@@ -1,9 +1,10 @@
 const polka = require('polka')
 const { json } = require('body-parser')
-const send = require('@polka/send-type')
-const { graphql, buildSchema } = require('graphql')
+const { buildSchema } = require('graphql')
+const { graphqlHTTP } = require('express-graphql')
 
-const { PORT = 3000 } = process.env;
+const PORT = process.env.PORT || 3000;
+const PRODUCTION = !process.env.PRODUCTION || false;
 
 const tasks = [
 	{ id:1, name:'Go to Market', complete:false },
@@ -23,19 +24,18 @@ const schema = buildSchema(`
 	}
 `);
 
-let ctx = {
+let rootValue = {
   tasks: () => tasks,
   task: (args) => tasks.find(o => o.id === args.id)
 }
 
 polka()
   .use(json())
-  .post('/', (req, res) => {
-    let { query } = req.body
-    graphql(schema, query, ctx).then(data => {
-      send(res, 200, data)
-    })
-  })
+  .use('/graphql', graphqlHTTP({
+    schema,
+    rootValue,
+    graphiql: PRODUCTION
+  }))
   .listen(PORT, err => {
     if (err) throw err;
     console.log('API Server listening on :', PORT)
