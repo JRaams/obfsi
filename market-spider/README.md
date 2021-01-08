@@ -19,10 +19,10 @@ A `x_<name>_.up.sql` and `x_<name>_.down.sql` will be created, edit these with t
 
 **Executing existing migrations**
 Export postgres URL
-`$ export POSTGRESQL_URL='postgres://obfsi@0.0.0.0:5432/obfsi?sslmode=disable'`
+`$ export DBSOURCE='postgres://obfsi@0.0.0.0:5432/obfsi?sslmode=disable'`
 
 Run migrations
-`$ migrate -database ${POSTGRESQL_URL} -path migrations up`
+`$ migrate -database ${DBSOURCE} -path migrations up`
 
 ### OCI container
 

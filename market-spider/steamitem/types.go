@@ -45,9 +45,9 @@ type Asset struct {
 
 // Price contains price and listing info about a specific Steam market asset at a point in time
 type Price struct {
-	ID          int    `json:"id"`
-	Assets_Name string `json:"assets_name"`
-	Time        int64  `json:"time"`
-	Listings    int    `json:"listings"`
-	Price       int    `json:"price"`
+	ID       int   `json:"id"`
+	Asset_ID int   `json:"asset_id"`
+	Time     int64 `json:"time"`
+	Listings int   `json:"listings"`
+	Price    int   `json:"price"`
 }

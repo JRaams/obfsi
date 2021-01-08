@@ -42,22 +42,11 @@ func saveSteamItems(db *sql.DB, steamItems []SteamItem) {
 	log.Printf("Saving %d prices to db...", len(steamItems))
 
 	for _, item := range steamItems {
-		if !AssetExists(db, item.Name) {
-			log.Printf("Creating asset %s...", item.Name)
-			asset := &Asset{
-				Name:      item.Name,
-				NameColor: item.Desc.NameColor,
-				IconURL:   item.Desc.IconURL,
-				Type:      item.Desc.Type,
-			}
-			CreateAsset(db, asset)
-		}
-
 		price := &Price{
-			AssetName: item.Name,
-			Time:      time.Now().Unix(),
-			Listings:  item.Listings,
-			Price:     item.Price,
+			Asset_ID: AssetNameIDMap[item.Name],
+			Time:     time.Now().Unix(),
+			Listings: item.Listings,
+			Price:    item.Price,
 		}
 		InsertPrice(db, price)
 	}
