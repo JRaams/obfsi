@@ -15,7 +15,7 @@ var priceJobs = []PriceJob{
 	},
 	{
 		"The Havoc Collection",
-		"https://steamcommunity.com/market/search/render?appid=730&count=88&sort_column=name&sort_dir=asc&&norender=1&category_730_ItemSet[]=tag_set_op10_ct",
+		"https://steamcommunity.com/market/search/render?appid=730&count=88&sort_column=name&sort_dir=asc&&norender=1&category_730_ItemSet[]=tag_set_op10_t",
 	},
 	{
 		"The Ancient Collection",

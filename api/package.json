@@ -1,0 +1,15 @@
+{
+  "name": "obfsi_api",
+  "version": "1.0.0",
+  "description": "Obfsi api",
+  "main": "index.js",
+  "repository": "https://github.com/JRaams/obfsi/",
+  "author": "JRaams",
+  "license": "MIT",
+  "dependencies": {
+    "@polka/send-type": "^0.5.2",
+    "body-parser": "^1.19.0",
+    "graphql": "^15.4.0",
+    "polka": "^0.5.2"
+  }
+}
