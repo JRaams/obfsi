@@ -26,19 +26,28 @@ type Desc struct {
 	Type      string `json:"type"`
 }
 
+// AssetGroup is a group of one or more Assets that can be bought in the operation shop
+type AssetGroup struct {
+	ID    int    `json:"id"`
+	Name  string `json:"name"`
+	Stars int    `json:"stars"`
+}
+
 // Asset contains data about a Steam market asset
 type Asset struct {
-	Name      string `json:"name"`
-	NameColor string `json:"nameColor"`
-	IconURL   string `json:"iconUrl"`
-	Type      string `json:"type"`
+	ID            int    `json:"id"`
+	Name          string `json:"name"`
+	AssetGroup_ID int    `json:"assetgroup_id"`
+	NameColor     string `json:"nameColor"`
+	IconURL       string `json:"iconUrl"`
+	Type          string `json:"type"`
 }
 
 // Price contains price and listing info about a specific Steam market asset at a point in time
 type Price struct {
-	ID        int    `json:"id"`
-	AssetName string `json:"assets_name"`
-	Time      int64  `json:"time"`
-	Listings  int    `json:"listings"`
-	Price     int    `json:"price"`
+	ID          int    `json:"id"`
+	Assets_Name string `json:"assets_name"`
+	Time        int64  `json:"time"`
+	Listings    int    `json:"listings"`
+	Price       int    `json:"price"`
 }

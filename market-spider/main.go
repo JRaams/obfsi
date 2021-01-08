@@ -9,6 +9,5 @@ func main() {
 	db := dbc.GetDBCon()
 	defer db.Close()
 
-	steamitem.CreateTables(db)
 	steamitem.FetchPrices(db)
 }
