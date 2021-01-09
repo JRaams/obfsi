@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Obfsi api",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "lint": "eslint ./",
+    "lint-fix": "eslint ./ --fix",
+    "format": "prettier --write \"**/*.{js,jsx,json,md}\""
   },
   "repository": "https://github.com/JRaams/obfsi/",
   "author": "JRaams",
@@ -13,5 +16,15 @@
     "express-graphql": "^0.12.0",
     "graphql": "^15.4.0",
     "polka": "^0.5.2"
+  },
+  "devDependencies": {
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "prettier": "^2.2.1"
   }
 }
