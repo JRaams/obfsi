@@ -1,10 +1,10 @@
 const service = require('./assetGroupService');
 
-const assetGroups = () => {
+const getAll = () => {
   return service.getAssetGroups();
 };
 
-const assetGroupByID = ({ id }) => {
+const getById = ({ id }) => {
   const ag = service.getAssetGroupByID(id);
   if (ag === undefined) {
     throw new Error(`No assetgroup found with id: ${id}`);
@@ -12,7 +12,7 @@ const assetGroupByID = ({ id }) => {
   return ag;
 };
 
-const assetGroupByName = ({ name }) => {
+const getByName = ({ name }) => {
   const ag = service.getAssetGroupByName(name);
   if (ag === undefined) {
     throw new Error(`No assetgroup found with name: ${name}`);
@@ -21,7 +21,9 @@ const assetGroupByName = ({ name }) => {
 };
 
 module.exports = {
-  assetGroups,
-  assetGroupByID,
-  assetGroupByName,
+  assetGroups: {
+    getAll,
+    getById,
+    getByName,
+  },
 };

@@ -1,10 +1,10 @@
 const service = require('./taskService');
 
-const tasks = () => {
+const getAll = () => {
   return service.getTasks();
 };
 
-const task = ({ id }) => {
+const get = ({ id }) => {
   const t = service.getTask(id);
   if (t === undefined) {
     throw new Error(`No task found with id: ${id}`);
@@ -13,6 +13,8 @@ const task = ({ id }) => {
 };
 
 module.exports = {
-  tasks,
-  task,
+  tasks: {
+    getAll,
+    get,
+  },
 };
