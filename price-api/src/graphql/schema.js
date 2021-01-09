@@ -22,6 +22,8 @@ const schema = buildSchema(`
   }
   type assets {
     getAll: [Asset]
+    getById(id: Int!): Asset
+    getByName(name: String!): Asset
   }
 
   type Query {
