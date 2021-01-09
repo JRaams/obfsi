@@ -15,7 +15,8 @@ const schema = buildSchema(`
     tasks: [Task]
     task(id: Int!): Task
     assetGroups: [AssetGroup]
-    assetGroup(id: Int!): AssetGroup
+    assetGroupByID(id: Int!): AssetGroup
+    assetGroupByName(name: String!): AssetGroup
   }
 `);
 

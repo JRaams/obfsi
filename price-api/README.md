@@ -7,10 +7,13 @@ GraphQL Api using [polka](https://github.com/lukeed/polka) to present steam asse
 1. Install npm dependencies
    `$ yarn install`
 
-2. Start
+2. Export DBSOURCE env
+   ` $ export DBSOURCE='postgres://obfsi@0.0.0.0:5432/obfsi?sslmode=disable'`
+
+3. Start
    `$ yarn start`
 
-3. Visit the [graphiql explorer](http://0.0.0.0:3000/graphql)
+4. Visit the [graphiql explorer](http://0.0.0.0:3000/graphql)
 
 ### Production
 

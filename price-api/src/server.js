@@ -29,5 +29,5 @@ polka()
   )
   .listen(PORT, (err) => {
     if (err) throw err;
-    console.log('API Server listening on :', PORT);
+    console.log('API Server listening on:', PORT);
   });
