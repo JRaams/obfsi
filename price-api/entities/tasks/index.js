@@ -4,4 +4,4 @@ const taskService = require('./taskService');
 module.exports = {
   taskResolver,
   taskService,
-}
+};

@@ -1,5 +1,5 @@
-const { taskResolver } = require('../entities/tasks')
+const { taskResolver } = require('../entities/tasks');
 
 module.exports = {
-  ...taskResolver
-}
+  ...taskResolver,
+};
