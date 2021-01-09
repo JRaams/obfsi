@@ -6,9 +6,9 @@ const getAll = () => {
     const sql = 'select * from assetgroups;';
     db.query(sql, (err, res) => {
       if (err) {
-        reject(new Error('Error fetching assetgroups...'));
+        return reject(new Error('Error fetching assetgroups...'));
       } else {
-        resolve(res.rows);
+        return resolve(res.rows);
       }
     });
   });
@@ -20,12 +20,12 @@ const getById = (id) => {
     const values = [id];
     db.query(sql, values, (err, res) => {
       if (err) {
-        reject(new Error(`Error fetching assetgroup with id ${id}...`));
+        return reject(new Error(`Error fetching assetgroup with id ${id}...`));
       } else {
         if (res.rowCount === 0) {
-          reject(new Error(`No assetgroup found with id ${id}...`));
+          return reject(new Error(`No assetgroup found with id ${id}...`));
         }
-        resolve(res.rows[0]);
+        return resolve(res.rows[0]);
       }
     });
   });
@@ -37,12 +37,12 @@ const getByName = (name) => {
     const values = [name];
     db.query(sql, values, (err, res) => {
       if (err) {
-        reject(new Error(`Error fetching assetgroup with name ${name}...`));
+        return reject(new Error(`Error fetching assetgroup with name ${name}...`));
       } else {
         if (res.rowCount === 0) {
-          reject(new Error(`No assetgroup found with name ${name}...`));
+          return reject(new Error(`No assetgroup found with name ${name}...`));
         }
-        resolve(res.rows[0]);
+        return resolve(res.rows[0]);
       }
     });
   });

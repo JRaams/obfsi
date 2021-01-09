@@ -13,5 +13,6 @@ module.exports = {
     'prettier/prettier': 'error',
     semi: 0,
     'comma-dangle': 0,
+    'max-len': [1, { code: 120 }],
   },
 };
