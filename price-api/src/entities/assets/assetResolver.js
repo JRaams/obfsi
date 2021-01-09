@@ -1,7 +1,7 @@
 const service = require('./assetService');
 
 const getAll = () => {
-  return service.getAssets();
+  return service.getAll();
 };
 
 module.exports = {

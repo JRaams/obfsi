@@ -1,11 +1,11 @@
 const service = require('./assetGroupService');
 
 const getAll = () => {
-  return service.getAssetGroups();
+  return service.getAll();
 };
 
 const getById = ({ id }) => {
-  const ag = service.getAssetGroupByID(id);
+  const ag = service.getById(id);
   if (ag === undefined) {
     throw new Error(`No assetgroup found with id: ${id}`);
   }
@@ -13,7 +13,7 @@ const getById = ({ id }) => {
 };
 
 const getByName = ({ name }) => {
-  const ag = service.getAssetGroupByName(name);
+  const ag = service.getByName(name);
   if (ag === undefined) {
     throw new Error(`No assetgroup found with name: ${name}`);
   }
