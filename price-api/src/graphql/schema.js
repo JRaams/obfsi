@@ -11,6 +11,14 @@ const schema = buildSchema(`
     name: String!
     stars: Int! 
   }
+  type Asset {
+    id: Int!
+    assetGroup: AssetGroup
+    name: String!
+    namecolor: String!
+    iconurl: String!
+    type: String!
+  }
   type tasks {
     getAll: [Task]
     get(id: Int!): Task
@@ -20,9 +28,13 @@ const schema = buildSchema(`
     getById(id: Int!): AssetGroup
     getByName(name: String!): AssetGroup
   }
+  type assets {
+    getAll: [Asset]
+  }
   type Query {
     tasks: tasks
     assetGroups: assetGroups
+    assets: assets
   }
 `);
 
