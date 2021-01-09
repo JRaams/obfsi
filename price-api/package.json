@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Obfsi api",
   "scripts": {
-    "start": "node server.js",
+    "start": "node src/server.js",
     "lint": "eslint src/",
     "lint-fix": "eslint src/ --fix",
     "format": "prettier --write \"src/**/*.{js,json,md}\""
