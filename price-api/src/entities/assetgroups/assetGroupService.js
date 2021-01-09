@@ -1,6 +1,7 @@
+const memoize = require('fast-memoize');
 const db = require('../../dbc/db');
 
-module.exports.getAssetGroups = () => {
+const getAssetGroups = () => {
   return new Promise((resolve, reject) => {
     const sql = 'select * from assetgroups;';
     db.query(sql, (err, res) => {
@@ -13,7 +14,7 @@ module.exports.getAssetGroups = () => {
   });
 };
 
-module.exports.getAssetGroupByID = (id) => {
+const getAssetGroupByID = (id) => {
   return new Promise((resolve, reject) => {
     const sql = 'select * from assetgroups where id = $1;';
     const values = [id];
@@ -30,7 +31,7 @@ module.exports.getAssetGroupByID = (id) => {
   });
 };
 
-module.exports.getAssetGroupByName = (name) => {
+const getAssetGroupByName = (name) => {
   return new Promise((resolve, reject) => {
     const sql = 'select * from assetgroups where name = $1;';
     const values = [name];
@@ -45,4 +46,10 @@ module.exports.getAssetGroupByName = (name) => {
       }
     });
   });
+};
+
+module.exports = {
+  getAssetGroups: memoize(getAssetGroups),
+  getAssetGroupByID: memoize(getAssetGroupByID),
+  getAssetGroupByName: memoize(getAssetGroupByName),
 };

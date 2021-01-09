@@ -1,6 +1,8 @@
+const memoize = require('fast-memoize');
 const db = require('../../dbc/db');
+const { getAssetGroupByID } = require('../assetgroups/assetGroupService');
 
-module.exports.getAssets = () => {
+const getAssets = () => {
   return new Promise((resolve, reject) => {
     const assetsSQL = 'select * from assets;';
     db.query(assetsSQL, (err, res) => {
@@ -8,29 +10,15 @@ module.exports.getAssets = () => {
         reject(new Error('Error fetching assets...'));
       } else {
         const assets = res.rows;
-
-        const assetGroupsSQL =
-          'select * from assetgroups ag where ag.id = ANY($1::int[]);';
-        const assetGroupIds = new Array(...new Set(res.rows.map((r) => r.id)));
-
-        db.query(assetGroupsSQL, [assetGroupIds], (err, res) => {
-          if (err) {
-            console.info(err);
-            reject(new Error('Error fetching assetgroups...'));
-          } else {
-            const assetGroups = new Map();
-            res.rows.forEach((row) => {
-              assetGroups[row.id] = row;
-            });
-
-            assets.forEach((asset) => {
-              asset.assetGroup = assetGroups[asset.assetgroup_id];
-            });
-
-            resolve(assets);
-          }
+        assets.forEach((asset) => {
+          asset.assetGroup = getAssetGroupByID(asset.assetgroup_id);
         });
+        resolve(assets);
       }
     });
   });
+};
+
+module.exports = {
+  getAssets: memoize(getAssets),
 };

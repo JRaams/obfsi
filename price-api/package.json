@@ -14,6 +14,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express-graphql": "^0.12.0",
+    "fast-memoize": "^2.5.2",
     "graphql": "^15.4.0",
     "pg": "^8.5.1",
     "polka": "^0.5.2"
