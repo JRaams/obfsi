@@ -16,3 +16,14 @@ GraphQL Api using [polka](https://github.com/lukeed/polka) to present steam asse
 
 1. EXPORT PRODUCTION=true
    This will disable the graphiql explorer
+
+### Linting and formatting
+
+1. Linting (read-only)
+   `$ yarn lint`
+
+2. Linting + fix
+   `$ yarn lint-fix`
+
+3. Formatting
+   `$ yarn format`
